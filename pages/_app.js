@@ -1,11 +1,14 @@
 import { Layout } from 'components/Layout';
+import AuthState from 'contexts/auth/authState';
 import 'styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <AuthState>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </AuthState>
   );
 }
 

@@ -1,10 +1,16 @@
+import { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import authContext from 'contexts/auth/authContext';
+import { Alert } from 'components/Alert';
 
 export default function CrearCuenta() {
   const { register, handleSubmit, errors } = useForm();
+  const AuthContext = useContext(authContext);
+  const { errorAuth, isLoadingAuth, registerUser } = AuthContext;
 
   const onSubmit = (data, e) => {
-    console.log(data);
+    e.target.reset();
+    registerUser(data);
   };
 
   return (
@@ -12,6 +18,8 @@ export default function CrearCuenta() {
       <h2 className="text-4xl font-sans font-bold text-gray-800 text-center my-4">
         Crear Cuenta
       </h2>
+
+      {errorAuth && <Alert message={errorAuth}/>}
 
       <div className="flex justify-center mt-5">
         <div className="w-full max-w-lg">
@@ -107,7 +115,7 @@ export default function CrearCuenta() {
             <input
               className="bg-red-500 hover:cursor-pointer w-full p-2 rounded text-white uppercase font-bold"
               type="submit"
-              value="Crear Cuenta"
+              value={isLoadingAuth ? 'Cargando' : 'Crear Cuenta'}
             />
           </form>
         </div>

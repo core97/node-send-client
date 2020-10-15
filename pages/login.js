@@ -1,10 +1,16 @@
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import authContext from 'contexts/auth/authContext';
+import { Alert } from 'components/Alert';
 
 export default function Login() {
   const { register, handleSubmit, errors } = useForm();
+  const AuthContext = useContext(authContext);
+  const { errorAuth, isLoadingAuth, logInUser } = AuthContext;
 
   const onSubmit = (data, e) => {
-    console.log(data);
+    e.target.reset();
+    logInUser(data);
   };
 
   return (
@@ -12,6 +18,8 @@ export default function Login() {
       <h2 className="text-4xl font-sans font-bold text-gray-800 text-center my-4">
         Iniciar Sesión
       </h2>
+
+      {errorAuth && <Alert message={errorAuth} />}
 
       <div className="flex justify-center mt-5">
         <div className="w-full max-w-lg">
@@ -65,6 +73,10 @@ export default function Login() {
                     value: true,
                     message: 'Este campo es obligatorio',
                   },
+                  minLength: {
+                    value: 6,
+                    message: 'La contraseña debe tener al menos 6 carácteres',
+                  },
                 })}
               />
               <div className="my-4">
@@ -79,7 +91,7 @@ export default function Login() {
             <input
               className="bg-red-500 hover:cursor-pointer w-full p-2 rounded text-white uppercase font-bold"
               type="submit"
-              value="Entrar"
+              value={isLoadingAuth ? 'Cargando' : 'Entrar'}
             />
           </form>
         </div>
