@@ -33,7 +33,7 @@ const AuthState = ({ children }) => {
 
   const registerUser = async (user) => {
     try {
-      dispatch(setLoadingAuth());
+      dispatch(setLoadingAuth(true));
 
       const { email, name, token } = await registerUserAPI(user);
 
@@ -52,7 +52,7 @@ const AuthState = ({ children }) => {
   // Autenticar usuarios
   const logInUser = async (user) => {
     try {
-      dispatch(setLoadingAuth());
+      dispatch(setLoadingAuth(true));
       const { email, name, token } = await logInUserAPI(user);
 
       localStorage.setItem('email', email);
@@ -80,15 +80,10 @@ const AuthState = ({ children }) => {
 
     if (token) {
       try {
-        dispatch(setLoadingAuth());
+        dispatch(setLoadingAuth(true));
 
         const { user } = await userAuthenticatedAPI(token);
         const { email, name } = user;
-
-        console.log('AUTHENTICATED')
-        console.log(user)
-        console.log(email)
-        console.log(name)
 
         dispatch(userAuthenticatedSuccess({ email, name }));
 
