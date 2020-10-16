@@ -6,6 +6,7 @@ import {
   SET_ERROR_FILE,
   SET_ERROR_LINK,
   CREATE_ALERT_FILE,
+  RESET_FILE_AND_LINK,
 } from 'types';
 
 const reducer = (state, action) => {
@@ -52,6 +53,20 @@ const reducer = (state, action) => {
       return {
         ...state,
         errorFile: action.payload.alertFile,
+      };
+    case RESET_FILE_AND_LINK:
+      return {
+        ...state,
+        filename: action.payload.filename,
+        originalFilename: action.payload.originalFilename,
+        availableDownloads: action.payload.availableDownloads,
+        passwordFile: action.payload.passwordFile,
+        autorFile: action.payload.autorFile,
+        urlFile: action.payload.urlFile,
+        errorFile: action.payload.errorFile,
+        isLoadingFile: action.payload.isLoadingFile,
+        errorLink: action.payload.errorLink,
+        isLoadingLink: action.payload.isLoadingLink,
       };
     default:
       return state;

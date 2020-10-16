@@ -13,6 +13,7 @@ export const SET_LOADING_LINK = 'SET_LOADING_LINK';
 export const SET_ERROR_FILE = 'SET_ERROR_FILE';
 export const SET_ERROR_LINK = 'SET_ERROR_LINK';
 export const CREATE_ALERT_FILE = 'CREATE_ALERT_FILE';
+export const RESET_FILE_AND_LINK = 'RESET_FILE_AND_LINK';
 
 export const registerSucess = ({ email, name, token }) => {
   return {
@@ -137,5 +138,23 @@ export const setErrorLink = (error) => {
       error: error,
       isLoadingLink: false,
     },
-  }
-}
+  };
+};
+
+export const resetFileAndLink = () => {
+  return {
+    type: RESET_FILE_AND_LINK,
+    payload: {
+      filename: null,
+      originalFilename: null,
+      availableDownloads: 1,
+      passwordFile: null,
+      autorFile: null,
+      urlFile: null,
+      errorFile: null,
+      isLoadingFile: false,
+      errorLink: null,
+      isLoadingLink: false,
+    },
+  };
+};

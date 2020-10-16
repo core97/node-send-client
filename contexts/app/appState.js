@@ -10,7 +10,8 @@ import {
   setErrorLink,
   setLoadingFile,
   setLoadingLink,
-  CREATE_ALERT_FILE
+  CREATE_ALERT_FILE,
+  resetFileAndLink as resetFileAndLinkAction
 } from 'types';
 
 const initialState = {
@@ -68,6 +69,10 @@ const AppState = ({ children }) => {
     });
   };
 
+  const resetFileAndLink = () => {
+    dispatch(resetFileAndLinkAction());
+  }
+
   return (
     <appContext.Provider
       value={{
@@ -81,7 +86,8 @@ const AppState = ({ children }) => {
         urlFile: state.urlFile,
         uploadFile,
         createLink,
-        createAlertFile
+        createAlertFile,
+        resetFileAndLink
       }}
     >
       {children}

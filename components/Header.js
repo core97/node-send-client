@@ -1,16 +1,19 @@
 import Link from 'next/link';
 import { useContext } from 'react';
 import authContext from 'contexts/auth/authContext';
+import appContext from 'contexts/app/appContext';
 
 export const Header = () => {
   const AuthContext = useContext(authContext);
+  const AppContext = useContext(appContext);
   const { user, isAuthenticated, logOutUser } = AuthContext;
+  const { resetFileAndLink } = AppContext;
 
   return (
     <header className="py-8 flex flex-col md:flex-row items-center justify-between">
       <Link href="/">
         <a>
-          <img className="w-64 mb-8 md:mb-0" src="logo.svg" />
+          <img onClick={resetFileAndLink} className="w-64 mb-8 md:mb-0" src="/logo.svg" />
         </a>
       </Link>
       <div>
