@@ -11,7 +11,9 @@ import {
   setLoadingFile,
   setLoadingLink,
   CREATE_ALERT_FILE,
-  resetFileAndLink as resetFileAndLinkAction
+  resetFileAndLink as resetFileAndLinkAction,
+  ADD_PASSWORD_FILE,
+  ADD_DOWNLOADS_FILE,
 } from 'types';
 
 const initialState = {
@@ -65,12 +67,26 @@ const AppState = ({ children }) => {
   const createAlertFile = (alertFile) => {
     dispatch({
       type: CREATE_ALERT_FILE,
-      payload: { alertFile }
+      payload: { alertFile },
     });
   };
 
   const resetFileAndLink = () => {
     dispatch(resetFileAndLinkAction());
+  };
+
+  const addPasswordToFile = (passwordFile) => {
+    dispatch({
+      type: ADD_PASSWORD_FILE,
+      payload: { passwordFile },
+    });
+  };
+
+  const addDownloadsToFile = (downloadsFile) => {
+    dispatch({
+      type: ADD_DOWNLOADS_FILE,
+      payload: { downloadsFile }
+    });
   }
 
   return (
@@ -87,7 +103,9 @@ const AppState = ({ children }) => {
         uploadFile,
         createLink,
         createAlertFile,
-        resetFileAndLink
+        resetFileAndLink,
+        addPasswordToFile,
+        addDownloadsToFile
       }}
     >
       {children}

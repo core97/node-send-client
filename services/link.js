@@ -65,3 +65,28 @@ export function createLinkAPI(data, token) {
       throw new Error(error.message);
     });
 }
+
+export function verifyFilePasswordAPI({ fileUrl, filePassword }) {
+  const apiURL = `${API_URL_BASE}/link/${fileUrl}`;
+
+  return fetch(apiURL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ filePassword }),
+  })
+    .then((res) => {
+      if (res.status === 401) {
+        throw new Error('Contraseña del link incorrecta');
+      } else if (res.status === 404) {
+        throw new Error('No existe ningún link con esa url');
+      } else {
+        return res.json();
+      }
+    })
+    .then(fromApiResponse)
+    .catch((error) => {
+      throw new Error(error.message);
+    });
+}

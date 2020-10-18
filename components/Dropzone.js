@@ -1,13 +1,13 @@
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useContext } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { uploadFileAPI } from 'services/file';
+import { Form } from 'components/Form';
 import authContext from 'contexts/auth/authContext';
 import appContext from 'contexts/app/appContext';
 
 export const Dropzone = () => {
   const AuthContext = useContext(authContext);
   const AppContext = useContext(appContext);
-  const { token } = AuthContext;
+  const { token, isAuthenticated } = AuthContext;
   const { isLoadingFile, createAlertFile, uploadFile, createLink } = AppContext;
 
   const onDropRejected = useCallback(() => {
@@ -34,7 +34,7 @@ export const Dropzone = () => {
   } = useDropzone({
     onDropAccepted,
     onDropRejected,
-    maxSize: token ? 1024 * 1024 * 10 : 1024,
+    maxSize: isAuthenticated ? 1024 * 1024 * 10 : 1024,
   });
 
   const paintFiles = acceptedFiles.map((file) => (
@@ -55,6 +55,9 @@ export const Dropzone = () => {
         <div className="mt-10 w-full">
           <h4 className="text-2xl font-bold text-center mb-4">Archivos</h4>
           <ul>{paintFiles}</ul>
+          {
+            isAuthenticated ? <Form /> : 'No esta autenticado'
+          }
           {isLoadingFile ? (
             <p className="my-10 text-center text-gray-600">Cargando archivo</p>
           ) : (

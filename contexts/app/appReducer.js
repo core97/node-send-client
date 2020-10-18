@@ -7,6 +7,8 @@ import {
   SET_ERROR_LINK,
   CREATE_ALERT_FILE,
   RESET_FILE_AND_LINK,
+  ADD_PASSWORD_FILE,
+  ADD_DOWNLOADS_FILE,
 } from 'types';
 
 const reducer = (state, action) => {
@@ -68,6 +70,16 @@ const reducer = (state, action) => {
         errorLink: action.payload.errorLink,
         isLoadingLink: action.payload.isLoadingLink,
       };
+    case ADD_PASSWORD_FILE:
+      return {
+        ...state,
+        passwordFile: action.payload.passwordFile,
+      };
+    case ADD_DOWNLOADS_FILE:
+      return {
+        ...state,
+        availableDownloads: action.payload.downloadsFile
+      }
     default:
       return state;
   }

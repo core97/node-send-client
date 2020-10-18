@@ -14,6 +14,8 @@ export const SET_ERROR_FILE = 'SET_ERROR_FILE';
 export const SET_ERROR_LINK = 'SET_ERROR_LINK';
 export const CREATE_ALERT_FILE = 'CREATE_ALERT_FILE';
 export const RESET_FILE_AND_LINK = 'RESET_FILE_AND_LINK';
+export const ADD_PASSWORD_FILE = 'ADD_PASSWORD_FILE';
+export const ADD_DOWNLOADS_FILE = 'ADD_DOWNLOADS_FILE';
 
 export const registerSucess = ({ email, name, token }) => {
   return {
@@ -121,7 +123,7 @@ export const setLoadingLink = (isLoading) => {
   };
 };
 
-export const setErrorFile = () => {
+export const setErrorFile = (error) => {
   return {
     type: SET_ERROR_FILE,
     payload: {
